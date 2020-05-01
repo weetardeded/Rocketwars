@@ -1,0 +1,8 @@
+"rocketwars"
+{
+	"base"		"base"
+	"title"		"Rocket Wars"
+	"maps"		"^gm_"
+	"menusystem"	"1"
+	"workshopid"	""
+}
