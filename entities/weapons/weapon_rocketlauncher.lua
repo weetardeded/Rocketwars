@@ -147,8 +147,18 @@ function SWEP:SecondaryAttack()
 
 
 
-		if (CurTime() - self.bt[1] > self.restoreTime) then
+		/*if (CurTime() - self.bt[1] > self.restoreTime) then
 			self.Owner:SetVelocity(-self.Owner:GetAimVector() * (800 - (self.Owner:GetVelocity():Length() / 3)))
+			self.bt[1] = CurTime();
+
+			local effectdata = EffectData()
+			effectdata:SetOrigin( self.Owner:GetPos() )
+			util.Effect( "WaterSurfaceExplosion", effectdata )
+			return;
+		end*/
+
+		if (CurTime() - self.bt[1] > self.restoreTime) then
+			self.Owner:SetVelocity(Vector(self.Owner:GetAimVector().x, self.Owner:GetAimVector().y, -self.Owner:GetAimVector().z) * (800 - (self.Owner:GetVelocity():Length() / 3)))
 			self.bt[1] = CurTime();
 
 			local effectdata = EffectData()
@@ -157,6 +167,26 @@ function SWEP:SecondaryAttack()
 			return;
 		end
 
+		if (CurTime() - self.bt[2] > self.restoreTime) then
+			self.Owner:SetVelocity(Vector(self.Owner:GetAimVector().x, self.Owner:GetAimVector().y, -self.Owner:GetAimVector().z) * (800 - (self.Owner:GetVelocity():Length() / 3)))
+			self.bt[2] = CurTime();
+
+			local effectdata = EffectData()
+			effectdata:SetOrigin( self.Owner:GetPos() )
+			util.Effect( "WaterSurfaceExplosion", effectdata )
+			return;
+		end
+
+		if (CurTime() - self.bt[3] > self.restoreTime) then
+			self.Owner:SetVelocity(Vector(self.Owner:GetAimVector().x, self.Owner:GetAimVector().y, -self.Owner:GetAimVector().z) * (800 - (self.Owner:GetVelocity():Length() / 3)))
+			self.bt[3] = CurTime();
+
+			local effectdata = EffectData()
+			effectdata:SetOrigin( self.Owner:GetPos() )
+			util.Effect( "WaterSurfaceExplosion", effectdata )
+			return;
+		end
+/*
 		if (CurTime() - self.bt[2] > self.restoreTime) then
 			self.Owner:SetVelocity(-self.Owner:GetAimVector() * (800 - (self.Owner:GetVelocity():Length() / 3)))
 			self.bt[2] = CurTime();
@@ -176,7 +206,7 @@ function SWEP:SecondaryAttack()
 			util.Effect( "WaterSurfaceExplosion", effectdata )
 			return;
 		end
-
+*/
 
 end
 
@@ -258,5 +288,15 @@ if (CLIENT) then
 		for i=1, #damagePos["damage"] do
 			draw.SimpleTextOutlined( damagePos["damage"][i], "CloseCaption_Normal", damagePos["pos"][i]:ToScreen().x, damagePos["pos"][i]:ToScreen().y, Color( 0, 255, 0, 255 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0, 0, 0, 255) );
 		end
+
+		local gap = 0
+		local x = ScrW() / 2
+		local y = ScrH() / 2
+		surface.SetDrawColor( 150, 255, 0, 255 )
+		local length = gap + 10
+		surface.DrawLine( x - length, y, x - gap, y )
+		surface.DrawLine( x + length, y, x + gap, y )
+		surface.DrawLine( x, y - length, x, y - gap )
+		surface.DrawLine( x, y + length, x, y + gap )
 	end)
 end
